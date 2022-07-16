@@ -13,16 +13,16 @@ struct ImageMessageView: View {
         if imageMessage.direction == "Incoming" {
             ChatBubble(direction: .left) {
                 Image(imageMessage.imageURL)
-                    .padding(.all, 20)
-                    .foregroundColor(Color.black)
-                    .background( Color(UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
+                    .resizable()
+                    .frame(width: UIScreen.main.bounds.width - 70,height: 200)
+                    .aspectRatio(contentMode: .fill)
             }
         } else if imageMessage.direction == "Outbound" {
             ChatBubble(direction: .right) {
                 Image(imageMessage.imageURL)
-                    .padding(.all, 20)
-                    .foregroundColor(Color.white)
-                    .background(Color.blue)
+                    .resizable()
+                    .frame(width: UIScreen.main.bounds.width - 70, height: 200)
+                    .aspectRatio(contentMode: .fill)
             }
         }
         
