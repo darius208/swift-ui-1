@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct TextMessageView: View {
-    var textMessage: String
+    var textMessage: TextMessage
     var body: some View {
-        HStack(alignment: .bottom) {
-            Text(textMessage)
-                       .padding(10)
-                       .foregroundColor( Color.black)
-                       .background( Color(UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
-                   .cornerRadius(10)
+        if textMessage.direction == "Incoming" {
+            ChatBubble(direction: .left) {
+                Text(textMessage.message)
+                    .padding(.all, 20)
+                    .foregroundColor(Color.black)
+                    .background( Color(UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
+            }
+        } else if textMessage.direction == "Outbound" {
+            ChatBubble(direction: .right) {
+                Text(textMessage.message)
+                    .padding(.all, 20)
+                    .foregroundColor(Color.white)
+                    .background(Color.blue)
+            }
         }
     }
     
@@ -23,6 +31,6 @@ struct TextMessageView: View {
 
 struct TextMessage_Previews: PreviewProvider {
     static var previews: some View {
-        TextMessageView(textMessage: "Message")
+        TextMessageView(textMessage: TextMessage(direction: "Outbound", timestamp: 1589463871, senderID: "Bob", destinationID: "Sally", message: "I was sent this message", deliveryStatus: "Delivered", deliveryTimestamp: 1589463871))
     }
 }

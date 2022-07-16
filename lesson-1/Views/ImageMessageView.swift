@@ -8,21 +8,30 @@
 import SwiftUI
 
 struct ImageMessageView: View {
-    var imagePath: String
+    var imageMessage: ImageMessage
     var body: some View {
-        VStack {
-            Image(imagePath)
+        if imageMessage.direction == "Incoming" {
+            ChatBubble(direction: .left) {
+                Image(imageMessage.imageURL)
+                    .padding(.all, 20)
+                    .foregroundColor(Color.black)
+                    .background( Color(UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
+            }
+        } else if imageMessage.direction == "Outbound" {
+            ChatBubble(direction: .right) {
+                Image(imageMessage.imageURL)
+                    .padding(.all, 20)
+                    .foregroundColor(Color.white)
+                    .background(Color.blue)
+            }
         }
-        .padding(10)
-        .foregroundColor(Color.black)
-        .background(Color(UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
-        .cornerRadius(10)
+        
         
     }
 }
 
 struct ImageMessageView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageMessageView(imagePath: "turtlerock")
+        ImageMessageView(imageMessage: ImageMessage(direction: "Incoming", timestamp: 1589485467, senderID: "Bob", destinationID: "Sally", imageURL: "turtlerock", thumbnailURL: "https://thumbnail.image.url", deliveryStatus: "Delivered", deliveryTimestamp:1589485467))
     }
 }

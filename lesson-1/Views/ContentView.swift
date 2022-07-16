@@ -13,12 +13,12 @@ let chatMessagesArray = [
 ] as [Any]
 struct ContentView: View {
     var body: some View {
-        List{
+        VStack{
             ForEach(Array(chatMessagesArray.enumerated()), id: \.offset){_, message in
                 if let txt = message as? TextMessage {
-                    TextMessageView(textMessage: txt.message)
+                    TextMessageView(textMessage: txt)
                 }else if let img = message as? ImageMessage{
-                    ImageMessageView(imagePath: img.imageURL)
+                    ImageMessageView(imageMessage: img)
                 }
                 
             }
