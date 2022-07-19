@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct ImageMessage: Hashable {
+    var id: Int
     var direction: String
     var timestamp: Int
     var senderID: String

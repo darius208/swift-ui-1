@@ -19,15 +19,15 @@ struct ChatBubble<Content>: View where Content: View {
             if direction == .left {
                 Spacer()
             }
-        }.padding([(direction == .left) ? .leading : .trailing, .top, .bottom], 20)
-            .padding((direction == .right) ? .leading : .trailing, 50)
+        }.padding([(direction == .left) ? .leading : .top], 1)
+        .padding([(direction == .right) ? .leading : .trailing], 1)
     }
 }
 
 struct ChatBubble_Previews: PreviewProvider {
     static var previews: some View {
         ChatBubble(direction: .right) {
-            TextMessageView(textMessage: TextMessage(direction: "Outbound", timestamp: 1589467569, senderID: "Sally", destinationID: "Bob", message: "I sent this message", deliveryStatus: "Delivered", deliveryTimestamp: 1589467622))
+            TextMessageView(textMessage: TextMessage(id: 1, direction: "Outbound", timestamp: 1589467569, senderID: "Sally", destinationID: "Bob", message: "I sent this message", deliveryStatus: "Delivered", deliveryTimestamp: 1589467622))
         }
     }
 }
