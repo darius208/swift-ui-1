@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+extension String {
+    var imageFrombase64: UIImage? {
+        guard let imageData = Data(base64Encoded: self, options: .ignoreUnknownCharacters) else {
+            return nil
+        }
+        return UIImage(data: imageData)
+    }
+}
+
 struct ImageMessageView: View {
     var imageMessage: ImageMessage
     var body: some View {
@@ -17,7 +26,7 @@ struct ImageMessageView: View {
                         .frame(width: 40, height: 40, alignment: .center)
                         .cornerRadius(20)
                 ChatBubble(direction: .left) {
-                    Image(imageMessage.imageURL)
+                    Image(uiImage: imageMessage.imageURL.imageFrombase64!)
                         .resizable()
                         .frame(width: UIScreen.main.bounds.width - 100,height: 200)
                         .aspectRatio(contentMode: .fill)
@@ -25,7 +34,7 @@ struct ImageMessageView: View {
             }.id(imageMessage.id)
         } else if imageMessage.direction == "Outbound" {
             ChatBubble(direction: .right) {
-                Image(imageMessage.imageURL)
+                Image(uiImage: imageMessage.imageURL.imageFrombase64!)
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width - 70, height: 200)
                     .aspectRatio(contentMode: .fill)
